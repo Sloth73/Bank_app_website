@@ -3,6 +3,9 @@
 // Selectiong elements
 const btnScroolTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+const tabs = document.querySelectorAll('.operations__tab')
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelector('.operations__content');
 // Modal window
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
@@ -29,7 +32,7 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
-// Smooth scrolling
+// Smooth scrolling (button)
 btnScroolTo.addEventListener('click', function (event) {
   const section1Coordinates = section1.getBoundingClientRect();
   console.log(section1Coordinates);
@@ -42,6 +45,7 @@ btnScroolTo.addEventListener('click', function (event) {
   //  Modern way, works in modern browsers
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+// Smooth scrolling (nav bar)
 document.querySelector('.nav__links').addEventListener('click', function (event) { //Adds listener to whole nav bar
   event.preventDefault() //preventing from not smooth scrolling build in html - href => #section
   if (event.target.classList.contains('nav__link')) { //Runs the listener only if clicked on one of the nav buttons, ref# bubbling, event delegation
@@ -49,3 +53,8 @@ document.querySelector('.nav__links').addEventListener('click', function (event)
     document.querySelector(navId).scrollIntoView({ behavior: 'smooth' });
   };
 });
+// Selection tabs content
+tabsContainer.addEventListener('click', function (event) {
+  const tabClicked = event.target.closest('.operations__tab'); //Must use closest in this case because if clicked on the number in button - the span element is selected
+  
+})
