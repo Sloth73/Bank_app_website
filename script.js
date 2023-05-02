@@ -67,16 +67,22 @@ tabsContainer.addEventListener('click', function (event) {
     .querySelector(`.operations__content--${tabClicked.dataset.tab}`)
     .classList.add('operations__content--active');//Dataset selects a value after data-tab
 });
+// Fading nav bar on hover
 const fadingListenerFunction = function (event) {
   if (event.target.classList.contains("nav__link")) {
     const link = event.target;
     const otherLinks = link.closest(".nav").querySelectorAll(".nav__link");
     const logo = link.closest(".nav").querySelector("img");
     otherLinks.forEach((el) => {
-      if (el != link) el.style.opacity = this;
+      if (el != link) el.style.opacity = this; //
     });
     logo.style.opacity = this;
   }
 }
-nav.addEventListener('mouseover', fadingListenerFunction.bind(0.5));
+nav.addEventListener('mouseover', fadingListenerFunction.bind(0.5)); //Event listener needs as 2nd argument a function - bind method returns a function, must use this as "argument"
 nav.addEventListener('mouseout', fadingListenerFunction.bind(1));
+
+// Sticky nav bar
+window.addEventListener('scroll', function () {
+  if(window.scrollY > 0) nav.classList.add('sticky') //Old way - not efficient, loosing performance
+})
