@@ -18,8 +18,7 @@ const closeModal = function () {
   overlay.classList.add('hidden');
 };
 
-for (let i = 0; i < btnsOpenModal.length; i++)
-  btnsOpenModal[i].addEventListener('click', openModal);
+btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal)); //btnsOpenModal is a node list so they allow to use for each method
 
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
@@ -28,4 +27,20 @@ document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
     closeModal();
   }
+});
+// Selectiong elements
+const btnScroolTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScroolTo.addEventListener('click', function (event) {
+  const section1Coordinates = section1.getBoundingClientRect();
+  console.log(section1Coordinates);
+  // Older way, works everytime
+    // window.scrollTo({
+    //   left: section1Coordinates.left + window.pageXOffset, // Page X offset adds current scroll position to a relative position on x of section 1
+    //   top: section1Coordinates.top + window.pageYOffset, // Page Y offset adds current scroll position to a relative position on y of section 1
+    //   behavior: 'smooth', //
+    // });
+  //  Modern way, works in modern browsers
+  section1.scrollIntoView({ behavior: 'smooth' });
 });
