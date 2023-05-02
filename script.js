@@ -56,5 +56,7 @@ document.querySelector('.nav__links').addEventListener('click', function (event)
 // Selection tabs content
 tabsContainer.addEventListener('click', function (event) {
   const tabClicked = event.target.closest('.operations__tab'); //Must use closest in this case because if clicked on the number in button - the span element is selected
-  
+  if(!tabClicked) return //# ref : Guard clause - if click anywhere but button exit function
+  tabClicked.classList.add('operations__tab--active') //Moves active tab upwards a little bit
+  console.log(tabClicked);
 })
