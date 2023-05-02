@@ -1,8 +1,9 @@
 'use strict';
 
-///////////////////////////////////////
+// Selectiong elements
+const btnScroolTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 // Modal window
-
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
@@ -28,10 +29,7 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
-// Selectiong elements
-const btnScroolTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
-
+// Smooth scrolling
 btnScroolTo.addEventListener('click', function (event) {
   const section1Coordinates = section1.getBoundingClientRect();
   console.log(section1Coordinates);
@@ -43,4 +41,11 @@ btnScroolTo.addEventListener('click', function (event) {
     // });
   //  Modern way, works in modern browsers
   section1.scrollIntoView({ behavior: 'smooth' });
+});
+document.querySelector('.nav__links').addEventListener('click', function (event) {
+  event.preventDefault() //preventing from not smooth scrolling build in html - href => #section
+  if (event.target.classList.contains('nav__link')) {
+    const navId = event.target.getAttribute('href');
+    document.querySelector(navId).scrollIntoView({ behavior: 'smooth' });
+  };
 });
