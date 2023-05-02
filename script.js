@@ -95,11 +95,35 @@ const revealSection = function (entries, observer) {
   entry.target.classList.remove('section--hidden');
   observer.unobserve(entry.target);
 };
+
 const sectionObserver = new IntersectionObserver(revealSection, {
-  root: null,
-  threshold: 0.15,
+  root: null, //start observin at 0 viewport
+  threshold: 0.15, //runs when 15% of element is visible - entry the viewport
 });
+
 allSections.forEach(function (section) {
   sectionObserver.observe(section);
   section.classList.add('section--hidden');
 });
+
+// Lazy loading images
+const imgTargets = document.querySelectorAll('img[data-src]');
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) return;
+  // Replace src with data-src
+  entry.target.src = entry.target.dataset.src;
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+
+  observer.unobserve(entry.target);
+};
+
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '-200px', //In real life it should be +200px to load the image before it is scrolled on to. This way - just to see lazy loading
+});
+
+imgTargets.forEach(img => imgObserver.observe(img));
