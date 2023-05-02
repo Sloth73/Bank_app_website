@@ -5,7 +5,7 @@ const btnScroolTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 const tabs = document.querySelectorAll('.operations__tab')
 const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelector('.operations__content');
+const tabsContent = document.querySelectorAll(".operations__content");
 // Modal window
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
@@ -57,7 +57,13 @@ document.querySelector('.nav__links').addEventListener('click', function (event)
 tabsContainer.addEventListener('click', function (event) {
   const tabClicked = event.target.closest('.operations__tab'); //Must use closest in this case because if clicked on the number in button - the span element is selected
   if (!tabClicked) return //# ref : Guard clause - if click anywhere but button exit function
+  // Remove classes
   tabs.forEach(tab => tab.classList.remove('operations__tab--active'));
-  tabClicked.classList.add('operations__tab--active') //Moves active tab upwards a little bit
-  console.log(tabClicked);
+  tabsContent.forEach(cont => cont.classList.remove('operations__content--active'));
+  // Adds classes
+  tabClicked.classList.add('operations__tab--active'); //Moves active tab upwards a little bit
+  document
+    .querySelector(`.operations__content--${tabClicked.dataset.tab}`)
+    .classList.add('operations__content--active');//Dataset selects a value after data-tab
+  
 })
