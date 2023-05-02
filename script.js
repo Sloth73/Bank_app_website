@@ -42,9 +42,9 @@ btnScroolTo.addEventListener('click', function (event) {
   //  Modern way, works in modern browsers
   section1.scrollIntoView({ behavior: 'smooth' });
 });
-document.querySelector('.nav__links').addEventListener('click', function (event) {
+document.querySelector('.nav__links').addEventListener('click', function (event) { //Adds listener to whole nav bar
   event.preventDefault() //preventing from not smooth scrolling build in html - href => #section
-  if (event.target.classList.contains('nav__link')) {
+  if (event.target.classList.contains('nav__link')) { //Runs the listener only if clicked on one of the nav buttons, ref# bubbling, event delegation
     const navId = event.target.getAttribute('href');
     document.querySelector(navId).scrollIntoView({ behavior: 'smooth' });
   };
